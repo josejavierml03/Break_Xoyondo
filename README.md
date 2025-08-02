@@ -11,7 +11,7 @@ Este proyecto automatiza votos en encuestas de [Xoyondo.com](https://xoyondo.com
 - [Chromedriver](https://chromedriver.chromium.org/downloads) compatible con tu versión de Chrome  
 - Cuenta y cliente de escritorio de **Windscribe VPN**
 - Isntalar dependencias de Selenium
-- Adaptar el script
+- Adaptar código fuente de Vote.py
 
 
 
