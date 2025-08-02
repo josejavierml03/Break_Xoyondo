@@ -9,18 +9,18 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException
 
 # === CONFIGURACIÓN ===
 URL_ENCUESTA = "https://xoyondo.com/ap/qxp2fpezbtff9n1"
-NUM_VOTOS = 5  # Cambia aquí cuántas veces quieres votar
+NUM_VOTOS = 600  # Cambia aquí cuántas veces quieres votar
 WINDSCRIBE_CLI = r"C:\Program Files\Windscribe\windscribe-cli.exe"  # Ajusta la ruta si es necesario
 VERBOSE = False  # True para ver opciones y botones encontrados
 
 # Lista de países/servidores disponibles
 SERVIDORES = [
-    "france", "germany", "netherlands", "spain", "romania", "switzerland",
-    "norway", "poland", "austria", "belgium", "czech", "italy"
+    "france", "germany", "netherlands", "romania", "switzerland",
+    "norway", "us central", "us west", "us east", "canada west",
+    "canada east", "united kingdom", "hong kong"
 ]
 
 ultimo_servidor = None  # Para no repetir el mismo país dos veces
@@ -38,7 +38,7 @@ def conectar_vpn():
 
     print(f"[VPN] Conectando a Windscribe en {servidor}...")
     subprocess.call([WINDSCRIBE_CLI, "connect", servidor], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    time.sleep(1)
+    time.sleep(7) # Esperar a que la conexión se establezca
 
 def desconectar_vpn():
     print("[VPN] Desconectando Windscribe...")
@@ -99,8 +99,9 @@ def votar():
             print("[ERROR] No se encontró ningún botón para votar.")
             driver.quit()
             return
-
+        
         time.sleep(1)
+        print("[VOTO] Voto enviado correctamente.")
 
     except Exception as e:
         print("[ERROR] Algo falló:")
